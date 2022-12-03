@@ -1,27 +1,18 @@
-import { writeFile, open, readdir } from "node:fs"
-import * as url from "url"
-
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
+import { writeFile, readdir } from "node:fs/promises"
 
 const create = async () => {
-    readdir(`${__dirname}/files`, (err, files) => {
-        ;(err) => {
-            if (err) throw err
+    try {
+        const folderPath = new URL("./files", import.meta.url)
+        const filePath = new URL("./files/fresh.txt", import.meta.url)
+        const folder = await readdir(folderPath)
+        if (folder.includes("fresh.txt")) {
+            throw new Error("FS operation failed")
         }
-        if (files.includes("fresh.txt")) {
-            console.error("Error: FS operation failed")
-        } else {
-            writeFile(
-                `${__dirname}/files/fresh.txt`,
-                "I am fresh and young",
-                "utf8",
-                (err) => {
-                    if (err) throw err
-                    console.log("File create")
-                }
-            )
-        }
-    })
+        writeFile(filePath, "I am fresh and young")
+        console.log("File create")
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 await create()

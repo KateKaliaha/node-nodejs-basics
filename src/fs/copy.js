@@ -34,10 +34,10 @@ const copy = async () => {
         const files = await readdir(__dirname)
 
         if (files.filter((file) => file === "files").length === 0) {
-            throw new Error("File not exists")
+            throw new Error("FS operation failed")
         }
         if (files.includes("files-copy")) {
-            throw new Error("File exists")
+            throw new Error("FS operation failed")
         }
         const projectFolder = `${__dirname}files-copy`
         await mkdir(projectFolder, { recursive: true })

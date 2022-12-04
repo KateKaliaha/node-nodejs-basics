@@ -1,5 +1,8 @@
-const read = async () => {
-    // Write your code here 
-};
+import fs from "node:fs"
 
-await read();
+const read = async () => {
+    const folderPath = new URL("./files/fileToRead.txt", import.meta.url)
+    fs.createReadStream(folderPath).pipe(process.stdout)
+}
+
+await read()

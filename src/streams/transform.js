@@ -3,7 +3,7 @@ const writeStream = process.stdout
 
 const transform = async () => {
     TransformStream._transform = (str) => {
-        return str.toString().trim().split("").reverse().join("")
+        return str.toString().trim().split("").reverse().join("") + "\n"
     }
 
     for await (const chunk of readStream) {

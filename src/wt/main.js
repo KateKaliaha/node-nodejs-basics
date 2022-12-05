@@ -11,16 +11,15 @@ const performCalculations = async () => {
                     workerData: 10 + ind,
                 })
                     .on("message", (message) =>
-                        res(console.log({ status: "resolved", data: message }))
+                        res({ status: "resolved", data: message })
                     )
-                    .on("error", () =>
-                        rej(console.log({ status: "error", data: null }))
-                    )
+                    .on("error", () => rej({ status: "error", data: null }))
             })
         )
     })
 
-    await Promise.allSettled(arr)
+    const result = await Promise.allSettled(arr)
+    console.log(result.map((el) => el.value))
 }
 
 await performCalculations()

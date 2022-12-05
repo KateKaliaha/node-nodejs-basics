@@ -1,9 +1,3 @@
-// const performCalculations = async () => {
-//     // Write your code here
-// };
-
-// await performCalculations();
-
 import * as os from "os"
 import { Worker } from "worker_threads"
 
